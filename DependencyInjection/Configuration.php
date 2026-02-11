@@ -78,7 +78,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addGatewaySection(ArrayNodeDefinition $node)
+    private function addGatewaySection(ArrayNodeDefinition $node): void
     {
         $gatewayNodeBuilder = $node
             ->fixXmlConfig('gateway')
