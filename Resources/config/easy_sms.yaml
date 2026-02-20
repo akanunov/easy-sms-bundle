@@ -1,0 +1,11 @@
+services:
+  Akanunov\EasySmsBundle\DependencyInjection\Factory\EasySmsFactory: ~
+
+  akanunov_easy_sms.easy_sms:
+    class: Overtrue\EasySms\EasySms
+    public: true
+    factory:
+      - '@Akanunov\EasySmsBundle\DependencyInjection\Factory\EasySmsFactory'
+      - createEasySms
+    arguments:
+      - null # Config

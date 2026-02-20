@@ -4,8 +4,8 @@ namespace Akanunov\EasySmsBundle\DependencyInjection;
 
 use Akanunov\EasySmsBundle\DependencyInjection\Factory\GatewayFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 class AkanunovEasySmsExtension extends Extension
@@ -18,14 +18,14 @@ class AkanunovEasySmsExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('factories.xml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('factories.yaml');
         $gatewayFactories = $this->getFactories($container, $configs);
         $configuration = new Configuration($gatewayFactories);
         $config = $this->processConfiguration($configuration, $configs);
-        $loader->load('easy_sms.xml');
+        $loader->load('easy_sms.yaml');
 
         $easySmsDefinition = $container->getDefinition('akanunov_easy_sms.easy_sms');
         $easySmsDefinition->replaceArgument(0, $config);
@@ -36,8 +36,8 @@ class AkanunovEasySmsExtension extends Extension
      */
     public function getConfiguration(array $configs, ContainerBuilder $container)
     {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('factories.xml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('factories.yaml');
         $gatewayFactories = $this->getFactories($container, $configs);
 
         return new Configuration($gatewayFactories);
