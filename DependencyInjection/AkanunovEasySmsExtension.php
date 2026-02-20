@@ -3,6 +3,7 @@
 namespace Akanunov\EasySmsBundle\DependencyInjection;
 
 use Akanunov\EasySmsBundle\DependencyInjection\Factory\GatewayFactoryInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -34,7 +35,7 @@ class AkanunovEasySmsExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration(array $configs, ContainerBuilder $container)
+    public function getConfiguration(array $configs, ContainerBuilder $container): ?ConfigurationInterface
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factories.yaml');
